@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DiceSetting: Codable, Identifiable {
+struct DiceSetting: Codable {
     var totalResult: Int
     var totalSide: Int
 }
