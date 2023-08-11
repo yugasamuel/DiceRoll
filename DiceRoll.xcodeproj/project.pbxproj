@@ -15,7 +15,7 @@
 		659161292A865C1000E76354 /* DiceRollUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659161282A865C1000E76354 /* DiceRollUITests.swift */; };
 		6591612B2A865C1000E76354 /* DiceRollUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591612A2A865C1000E76354 /* DiceRollUITestsLaunchTests.swift */; };
 		659161382A86713600E76354 /* FileManager-DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659161372A86713600E76354 /* FileManager-DocumentsDirectory.swift */; };
-		6591613A2A86796C00E76354 /* NumberResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659161392A86796C00E76354 /* NumberResult.swift */; };
+		6591613C2A86878400E76354 /* DiceSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591613B2A86878400E76354 /* DiceSetting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +47,7 @@
 		659161282A865C1000E76354 /* DiceRollUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRollUITests.swift; sourceTree = "<group>"; };
 		6591612A2A865C1000E76354 /* DiceRollUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRollUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		659161372A86713600E76354 /* FileManager-DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsDirectory.swift"; sourceTree = "<group>"; };
-		659161392A86796C00E76354 /* NumberResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberResult.swift; sourceTree = "<group>"; };
+		6591613B2A86878400E76354 /* DiceSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSetting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +100,7 @@
 			children = (
 				6591610D2A865C0E00E76354 /* DiceRollApp.swift */,
 				6591610F2A865C0E00E76354 /* ContentView.swift */,
-				659161392A86796C00E76354 /* NumberResult.swift */,
+				6591613B2A86878400E76354 /* DiceSetting.swift */,
 				659161372A86713600E76354 /* FileManager-DocumentsDirectory.swift */,
 				659161112A865C1000E76354 /* Assets.xcassets */,
 				659161132A865C1000E76354 /* Preview Content */,
@@ -264,9 +264,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				659161382A86713600E76354 /* FileManager-DocumentsDirectory.swift in Sources */,
-				6591613A2A86796C00E76354 /* NumberResult.swift in Sources */,
 				659161102A865C0E00E76354 /* ContentView.swift in Sources */,
 				6591610E2A865C0E00E76354 /* DiceRollApp.swift in Sources */,
+				6591613C2A86878400E76354 /* DiceSetting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
