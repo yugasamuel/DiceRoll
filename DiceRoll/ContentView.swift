@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var rollResult = 1
+    @State private var rollResult = 0
     @State private var totalResult = 0
     @State private var totalSide = 4
     @State private var isCustomizing = false
@@ -23,22 +23,22 @@ struct ContentView: View {
                 Spacer()
                 Button("Reset") {
                     totalResult = 0
+                    results.removeAll()
                 }
             }
             .padding()
             
             VStack(spacing: 20) {
                 Text("Total: \(totalResult)")
-                
+                    .font(.headline)
                 Text("\(rollResult)")
                     .font(.largeTitle)
                 
                 Button(action: {
-                    results.append(rollResult)
-                    totalResult += rollResult
+                    rollDice()
                 }, label: {
                     Text("Roll")
-                        .font(.title2)
+                        .font(.title2.bold())
                         .foregroundColor(.white)
                         .padding(12)
                         .frame(width: 125)
@@ -56,7 +56,7 @@ struct ContentView: View {
                 }
             } else {
                 Spacer()
-                Text("Roll dice to see results of it!")
+                Text("It's time to roll the dice.")
                 Spacer()
             }
         }
@@ -73,6 +73,12 @@ struct ContentView: View {
             Button("100-sided") { totalSide = 100 }
             Button("Cancel", role: .cancel) { }
         }
+    }
+    
+    func rollDice() {
+        rollResult = Array(1...totalSide).randomElement()!
+        results.append(rollResult)
+        totalResult += rollResult
     }
 }
 
