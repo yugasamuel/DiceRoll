@@ -14,6 +14,7 @@
 		6591611F2A865C1000E76354 /* DiceRollTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591611E2A865C1000E76354 /* DiceRollTests.swift */; };
 		659161292A865C1000E76354 /* DiceRollUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659161282A865C1000E76354 /* DiceRollUITests.swift */; };
 		6591612B2A865C1000E76354 /* DiceRollUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591612A2A865C1000E76354 /* DiceRollUITestsLaunchTests.swift */; };
+		659161382A86713600E76354 /* FileManager-DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659161372A86713600E76354 /* FileManager-DocumentsDirectory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		659161242A865C1000E76354 /* DiceRollUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiceRollUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		659161282A865C1000E76354 /* DiceRollUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRollUITests.swift; sourceTree = "<group>"; };
 		6591612A2A865C1000E76354 /* DiceRollUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceRollUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		659161372A86713600E76354 /* FileManager-DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager-DocumentsDirectory.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				6591610D2A865C0E00E76354 /* DiceRollApp.swift */,
 				6591610F2A865C0E00E76354 /* ContentView.swift */,
+				659161372A86713600E76354 /* FileManager-DocumentsDirectory.swift */,
 				659161112A865C1000E76354 /* Assets.xcassets */,
 				659161132A865C1000E76354 /* Preview Content */,
 			);
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				659161382A86713600E76354 /* FileManager-DocumentsDirectory.swift in Sources */,
 				659161102A865C0E00E76354 /* ContentView.swift in Sources */,
 				6591610E2A865C0E00E76354 /* DiceRollApp.swift in Sources */,
 			);
