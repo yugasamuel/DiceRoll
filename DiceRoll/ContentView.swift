@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreHaptics
 
 struct ContentView: View {
     @State private var rollResult = 0
@@ -14,6 +15,7 @@ struct ContentView: View {
     @State private var isCustomizing = false
     @State private var isRestarting = false
     @State private var results = [Int]()
+    @State private var feedback = UINotificationFeedbackGenerator()
     
     let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedData")
     
@@ -44,6 +46,7 @@ struct ContentView: View {
                     .font(.largeTitle)
                 
                 Button(action: {
+                    feedback.notificationOccurred(.success)
                     rollDice()
                 }, label: {
                     Text("Roll")
@@ -88,6 +91,7 @@ struct ContentView: View {
         }
         .onAppear {
             loadData()
+            feedback.prepare()
         }
     }
     
