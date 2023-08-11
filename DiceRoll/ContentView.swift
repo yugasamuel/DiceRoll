@@ -83,8 +83,8 @@ struct ContentView: View {
             Button("100-sided") { updateTotalSide(to: 100) }
             Button("Cancel", role: .cancel) { }
         }
-        .alert("Reset confirmation", isPresented: $isRestarting) {
-            Button("Confirm", role: .destructive) { resetData() }
+        .alert("Are you sure want to reset?", isPresented: $isRestarting) {
+            Button("Reset", role: .destructive) { resetData() }
         }
         .onAppear {
             loadData()
