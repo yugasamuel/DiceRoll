@@ -31,6 +31,7 @@ struct ContentView: View {
             VStack(spacing: 20) {
                 Text("Total: \(totalResult)")
                     .font(.headline)
+                
                 Text("\(rollResult)")
                     .font(.largeTitle)
                 
@@ -55,13 +56,14 @@ struct ContentView: View {
                     }
                 }
             } else {
-                Spacer()
-                Text("It's time to roll the dice.")
-                Spacer()
+                VStack {
+                    Spacer()
+                    Text("It's time to roll the dice!")
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color(.systemGray6))
             }
-        }
-        .toolbar {
-            
         }
         .confirmationDialog("Customize", isPresented: $isCustomizing) {
             Button("4-sided") { totalSide = 4 }
