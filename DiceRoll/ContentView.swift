@@ -12,19 +12,27 @@ struct ContentView: View {
     @State private var totalResult = 0
     @State private var totalSide = 4
     @State private var isCustomizing = false
+    @State private var isRestarting = false
     @State private var results = [Int]()
+    
+    let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedResults")
     
     var body: some View {
         VStack {
             HStack {
-                Button("Customize") {
-                    isCustomizing = true
-                }
+                Button(action: {
+                    isRestarting = true
+                }, label: {
+                    Label("Reset", systemImage: "arrow.counterclockwise")
+                })
+                
                 Spacer()
-                Button("Reset") {
-                    totalResult = 0
-                    results.removeAll()
-                }
+                
+                Button(action: {
+                    isCustomizing = true
+                }, label: {
+                    Label("\(totalSide)-sided", systemImage: "dice")
+                })
             }
             .padding()
             
@@ -75,12 +83,46 @@ struct ContentView: View {
             Button("100-sided") { totalSide = 100 }
             Button("Cancel", role: .cancel) { }
         }
+        .alert("Reset confirmation", isPresented: $isRestarting) {
+            Button("Confirm", role: .destructive) { resetData() }
+        }
+        .onAppear {
+            loadData()
+        }
+    }
+
+    func loadData() {
+        do {
+            let data = try Data(contentsOf: savePath)
+            results = try JSONDecoder().decode([Int].self, from: data)
+            for result in results {
+                totalResult += result
+            }
+        } catch {
+            results = []
+        }
+    }
+    
+    func saveData() {
+        do {
+            let data = try JSONEncoder().encode(results)
+            try data.write(to: savePath, options: [.atomic, .completeFileProtection])
+        } catch {
+            print("Unable to save data.")
+        }
+    }
+    
+    func resetData() {
+        totalResult = 0
+        results.removeAll()
+        saveData()
     }
     
     func rollDice() {
         rollResult = Array(1...totalSide).randomElement()!
         results.append(rollResult)
         totalResult += rollResult
+        saveData()
     }
 }
 
