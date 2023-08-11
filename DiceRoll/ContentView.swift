@@ -16,7 +16,9 @@ struct ContentView: View {
     @State private var isRestarting = false
     @State private var results = [Int]()
     @State private var feedback = UINotificationFeedbackGenerator()
+    @State private var scaleEffect = 1.0
     
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedData")
     
     var body: some View {
@@ -38,12 +40,13 @@ struct ContentView: View {
             }
             .padding()
             
-            VStack(spacing: 20) {
+            VStack(spacing: 22) {
                 Text("Total: \(totalResult)")
                     .font(.headline)
                 
                 Text("\(rollResult)")
                     .font(.largeTitle)
+                    .scaleEffect(scaleEffect)
                 
                 Button(action: {
                     feedback.notificationOccurred(.success)
@@ -119,10 +122,23 @@ struct ContentView: View {
     }
     
     func rollDice() {
-        rollResult = Array(1...totalSide).randomElement()!
-        results.insert(rollResult, at: 0)
-        totalResult += rollResult
-        saveData()
+        var runCount = 0
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+            rollResult = Array(1...totalSide).randomElement()!
+            runCount += 1
+            scaleEffect += 0.7
+            
+            if scaleEffect > 1.7 {
+                scaleEffect = 1
+            }
+            
+            if runCount == 16 {
+                timer.invalidate()
+                results.insert(rollResult, at: 0)
+                totalResult += rollResult
+                saveData()
+            }
+        }
     }
     
     func resetData() {
