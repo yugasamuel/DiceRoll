@@ -9,39 +9,55 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var rollResult = 1
-    @State private var totalResult = 1
+    @State private var totalResult = 0
     @State private var totalSide = 4
     @State private var isCustomizing = false
+    @State private var results = [Int]()
     
     var body: some View {
         VStack {
             HStack {
-                Text("Total: \(totalResult)")
-                Spacer()
                 Button("Customize") {
                     isCustomizing = true
+                }
+                Spacer()
+                Button("Reset") {
+                    totalResult = 0
                 }
             }
             .padding()
             
-            Text("\(rollResult)")
-                .font(.largeTitle)
+            VStack(spacing: 20) {
+                Text("Total: \(totalResult)")
+                
+                Text("\(rollResult)")
+                    .font(.largeTitle)
+                
+                Button(action: {
+                    results.append(rollResult)
+                    totalResult += rollResult
+                }, label: {
+                    Text("Roll")
+                        .font(.title2)
+                        .foregroundColor(.white)
+                        .padding(12)
+                        .frame(width: 125)
+                        .background(Color(.systemBlue))
+                        .cornerRadius(8)
+                })
+            }
+            .padding(.bottom, 25)
             
-            Button(action: {
-                // add action
-            }, label: {
-                Text("Roll")
-                    .font(.title2)
-                    .foregroundColor(.white)
-                    .padding(12)
-                    .frame(width: 125)
-                    .background(Color(.systemBlue))
-                    .cornerRadius(8)
-            })
-            .padding(.bottom)
-            
-            List {
-                Text("A")
+            if !results.isEmpty {
+                List {
+                    ForEach(results, id: \.self) { result in
+                        Text("\(result)")
+                    }
+                }
+            } else {
+                Spacer()
+                Text("Roll dice to see results of it!")
+                Spacer()
             }
         }
         .toolbar {
