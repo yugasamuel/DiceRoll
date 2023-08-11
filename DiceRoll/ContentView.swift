@@ -15,7 +15,7 @@ struct ContentView: View {
     @State private var isRestarting = false
     @State private var results = [Int]()
     
-    let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedResults")
+    let savePath = FileManager.documentsDirectory.appendingPathComponent("SavedData")
     
     var body: some View {
         VStack {
@@ -74,13 +74,13 @@ struct ContentView: View {
             }
         }
         .confirmationDialog("Customize", isPresented: $isCustomizing) {
-            Button("4-sided") { totalSide = 4 }
-            Button("6-sided") { totalSide = 6 }
-            Button("8-sided") { totalSide = 8 }
-            Button("10-sided") { totalSide = 10 }
-            Button("12-sided") { totalSide = 12 }
-            Button("20-sided") { totalSide = 20 }
-            Button("100-sided") { totalSide = 100 }
+            Button("4-sided") { updateTotalSide(to: 4) }
+            Button("6-sided") { updateTotalSide(to: 6) }
+            Button("8-sided") { updateTotalSide(to: 8) }
+            Button("10-sided") { updateTotalSide(to: 10) }
+            Button("12-sided") { updateTotalSide(to: 12) }
+            Button("20-sided") { updateTotalSide(to: 20) }
+            Button("100-sided") { updateTotalSide(to: 100) }
             Button("Cancel", role: .cancel) { }
         }
         .alert("Reset confirmation", isPresented: $isRestarting) {
@@ -90,38 +90,46 @@ struct ContentView: View {
             loadData()
         }
     }
-
+    
     func loadData() {
         do {
             let data = try Data(contentsOf: savePath)
-            results = try JSONDecoder().decode([Int].self, from: data)
-            for result in results {
-                totalResult += result
-            }
+            let savedData = try JSONDecoder().decode(SavedData.self, from: data)
+            results = savedData.results
+            rollResult = savedData.rollResult
+            totalResult = savedData.totalResult
+            totalSide = savedData.totalSide
         } catch {
             results = []
         }
     }
     
     func saveData() {
+        let savedData = SavedData(results: results, rollResult: rollResult, totalResult: totalResult, totalSide: totalSide)
         do {
-            let data = try JSONEncoder().encode(results)
+            let data = try JSONEncoder().encode(savedData)
             try data.write(to: savePath, options: [.atomic, .completeFileProtection])
         } catch {
             print("Unable to save data.")
         }
     }
     
+    func rollDice() {
+        rollResult = Array(1...totalSide).randomElement()!
+        results.insert(rollResult, at: 0)
+        totalResult += rollResult
+        saveData()
+    }
+    
     func resetData() {
+        rollResult = 0
         totalResult = 0
         results.removeAll()
         saveData()
     }
     
-    func rollDice() {
-        rollResult = Array(1...totalSide).randomElement()!
-        results.append(rollResult)
-        totalResult += rollResult
+    func updateTotalSide(to newTotalSide: Int) {
+        totalSide = newTotalSide
         saveData()
     }
 }
